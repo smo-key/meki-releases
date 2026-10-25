@@ -1,0 +1,134 @@
+<!doctype html>
+<!-- The gh-pages site of smo-key/meki-releases (release spec §11). release.yml › publish copies this file, install.sh
+     and fonts/ (from desktop/app/src-tauri/frame-kit/fonts) to gh-pages, and swaps the install URL below for
+     https://<vars.PAGES_DOMAIN> once that variable is set. No analytics, no third-party scripts. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Meki</title>
+<meta name="description" content="Photo curation for working photographers. For Macs with Apple silicon.">
+<meta name="color-scheme" content="dark">
+<style>
+  @font-face { font-family: "Mona Sans"; src: url("fonts/mona-sans-latin-wght-normal.woff2") format("woff2"); font-weight: 200 900; font-display: swap; }
+  @font-face { font-family: "Bricolage Grotesque"; src: url("fonts/bricolage-grotesque-latin-standard-normal.woff2") format("woff2"); font-weight: 200 800; font-display: swap; }
+  @font-face { font-family: "Martian Mono"; src: url("fonts/martian-mono-latin-wght-normal.woff2") format("woff2"); font-weight: 100 800; font-display: swap; }
+
+  :root {
+    --surface-base: #232220;
+    --surface-sunken: #1E1D1B;
+    --surface-raised: #2B2A27;
+    --surface-hover: #343230;
+    --line: #3A3936;
+    --line-strong: #45433F;
+    --text-strong: #F0EEEA;
+    --text: #D6D3CD;
+    --text-quiet: #B5B1AA;
+    --text-muted: #9A968E;
+    --accent: #E3A64A;
+    --accent-hover: #EDB866;
+    --accent-press: #C98F38;
+    --on-accent: #1C1A17;
+    --sans: "Mona Sans", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+    --display: "Bricolage Grotesque", var(--sans);
+    --mono: "Martian Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    min-height: 100vh;
+    background: var(--surface-base);
+    color: var(--text);
+    font: 400 15px/1.55 var(--sans);
+    display: grid;
+    place-items: center;
+    padding: 48px 16px;
+  }
+  main { width: 100%; max-width: 640px; }
+  h1 {
+    font: 600 56px/1 var(--display);
+    letter-spacing: -0.02em;
+    color: var(--text-strong);
+    margin: 0 0 14px;
+  }
+  .lede { font-size: 17px; color: var(--text); margin: 0 0 32px; max-width: 34em; }
+  .install {
+    display: flex;
+    align-items: stretch;
+    background: var(--surface-sunken);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .install code {
+    flex: 1;
+    min-width: 0;
+    padding: 14px 16px;
+    font: 400 13px/1.5 var(--mono);
+    color: var(--text-strong);
+    white-space: nowrap;
+    overflow-x: auto;
+  }
+  .install button {
+    flex: none;
+    border: 0;
+    border-left: 1px solid var(--line);
+    padding: 0 18px;
+    background: var(--accent);
+    color: var(--on-accent);
+    font: 600 13px/1 var(--sans);
+    cursor: pointer;
+  }
+  .install button:hover { background: var(--accent-hover); }
+  .install button:active { background: var(--accent-press); }
+  .install button:focus-visible { outline: 2px solid var(--text-strong); outline-offset: -4px; }
+  .note { color: var(--text-muted); font-size: 13px; margin: 12px 0 0; }
+  .note code { font: 400 12px var(--mono); color: var(--text-quiet); }
+  nav { display: flex; gap: 24px; margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--line-strong); }
+  nav a { color: var(--text-quiet); text-decoration: none; font-size: 14px; }
+  nav a:hover, nav a:focus-visible { color: var(--text-strong); text-decoration: underline; text-underline-offset: 3px; }
+  @media (max-width: 480px) {
+    h1 { font-size: 44px; }
+    .install { flex-direction: column; }
+    .install button { border-left: 0; border-top: 1px solid var(--line); padding: 12px; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <h1>Meki</h1>
+  <p class="lede">Photo curation for working photographers. For Macs with Apple silicon.</p>
+  <div class="install">
+    <code id="cmd">curl -fsSL https://smo-key.github.io/meki-releases/install.sh | sh</code>
+    <button type="button" id="copy" hidden>Copy</button>
+  </div>
+  <p class="note">Installs Meki in ~/Applications for your user. Beta: add <code>-s -- --beta</code>.</p>
+  <nav>
+    <a href="https://github.com/smo-key/meki-releases/releases">Release notes</a>
+    <a id="dmg" href="https://github.com/smo-key/meki-releases/releases">Download the .dmg</a>
+  </nav>
+</main>
+<script>
+  (() => {
+    const button = document.getElementById("copy");
+    const cmd = document.getElementById("cmd");
+    if (navigator.clipboard) {
+      button.hidden = false;
+      button.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(cmd.textContent);
+          button.textContent = "Copied";
+        } catch {
+          button.textContent = "Select and copy";
+        }
+        setTimeout(() => { button.textContent = "Copy"; }, 1600);
+      });
+    }
+    fetch("install/regular.json", { cache: "no-cache" })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((m) => { if (m && typeof m.dmg === "string" && m.dmg.startsWith("https://")) document.getElementById("dmg").href = m.dmg; })
+      .catch(() => {});
+  })();
+</script>
+</body>
+</html>

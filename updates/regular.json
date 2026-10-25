@@ -1,0 +1,13 @@
+{
+  "version": "1.0.0",
+  "notes": "New\n- Clients, engagements and projects in one sidebar, with an Inbox for photos without a project\n- Project statuses you configure, each on a required role\n- Lightroom Classic through MekiBridge as the main edit path; every Sync keeps a version\n- Storage locations with Minimum copies, Trash and retention\n- Instagram queue, calendar, first comment and people tags\n- Date, time and number formats in Settings › Language and formats",
+  "pub_date": "2026-10-25T22:27:40Z",
+  "platforms": {
+    "darwin-aarch64": {
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUOVNsZC9RQ1VSQU5raGVkVUJESldXNVorM3MxN3E5Z2sxM29Gd2t3aVZGVnJkRHM0ekRVdnVQTW5hZ0hXdDVaTWJVeEE4RkpzSkFCTWhJTkpYK0Q1SmxEVVlIRHAydFFzPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzkyOTY3MTc2CWZpbGU6TWVraV8xLjAuMF9hYXJjaDY0LmFwcC50YXIuZ3oKUG56WldUSkFKZW9DSVlTaXNZY3cwRVBLK3gwV2FSSTBxclpYd0JCTCtaUUdlWjFwblFDWHphZVIyL1pQd2xjRGhCNENiT0hLamhHSWlWM081SDFVQmc9PQo=",
+      "url": "https://github.com/smo-key/meki-releases/releases/download/v1.0.0/Meki_1.0.0_aarch64.app.tar.gz",
+      "size": 40606939,
+      "sha256": "33c2b95f21df59ab2c896e048a32dbbab3c807ad07c128f44bb8cdb4f955fad4"
+    }
+  }
+}
