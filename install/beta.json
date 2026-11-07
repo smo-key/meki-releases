@@ -1,7 +1,7 @@
 {
-  "version": "1.1.0",
-  "url": "https://github.com/smo-key/meki-releases/releases/download/v1.1.0/Meki_1.1.0_aarch64.app.tar.gz",
-  "sha256": "6a0afb1ece1f08cb6a2aedac7ca3534ac43e7d26e8947f51bd001abe49bd4fd2",
-  "size": 48317762,
-  "dmg": "https://github.com/smo-key/meki-releases/releases/download/v1.1.0/Meki_1.1.0_aarch64.dmg"
+  "version": "1.2.0",
+  "url": "https://github.com/smo-key/meki-releases/releases/download/v1.2.0/Meki_1.2.0_aarch64.app.tar.gz",
+  "sha256": "08470c74e70fd3bea46e1b5a5eecabbf4e12683d88ccd55bc8cf23eb5521ef6d",
+  "size": 48433588,
+  "dmg": "https://github.com/smo-key/meki-releases/releases/download/v1.2.0/Meki_1.2.0_aarch64.dmg"
 }
